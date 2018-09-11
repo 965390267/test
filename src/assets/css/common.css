@@ -1361,6 +1361,7 @@ img {
  #pagenextandlast a,
 #pagenextandlast span,
 #pagenextandlast>i {
+    cursor: url('./../images/link.cur'), auto;
     display: inline-block;
     vertical-align: middle;
     margin: 0 6px;
@@ -1380,11 +1381,11 @@ img {
     line-height: 30px;
 }
 
-#content p {
+/* #content p {
     padding: 0px;
     margin: 0px;
     line-height: 2;
-}
+} */
 
 .post-list .article p {
     white-space: pre-wrap;
@@ -2657,19 +2658,19 @@ a img.aligncenter {
     margin: 0 auto;
     padding: 0px;
     width: 256px;
-    height: 264px;
+    /* height: 264px; */
     text-align: left;
     overflow: hidden;
-    *display: inline-block;
+    display: inline-block;
 }
 
 #zuixin_biankuang .wenzhang {
     padding: 15px 0px 0px 11px;
     font-size: 12px;
     width: 230px;
-    height: 245px;
+    /* height: 245px; */
     overflow: hidden;
-    *display: inline-block;
+    display: inline-block;
 }
 
 #zuixin_biankuang ul li {
@@ -3960,6 +3961,10 @@ html {
 #fenlei_biankuang li {
     float: left;
     width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     font-family: "Microsoft YaHei", "微软雅黑", "Trebuchet MS", Arial, Verdana, Tahoma, sans-serif;
 }
 

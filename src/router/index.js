@@ -49,8 +49,9 @@ export default new Router({
             }, 
             {
                 path: "*",
-                component: err //重定向
-            },]
+                redirect: '/' //重定向
+            }
+            ]
         }
     ]
 })

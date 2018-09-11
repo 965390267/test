@@ -5,13 +5,13 @@
     
             <ul class="bar">
     
-                <li class="item common animated tada infinite">
+                <li class="item common animated  ">
     
                     <router-link to='/' class="chaffle " data-lang="zh">首页</router-link>
 
                 </li>
     
-                <li class="item common animated tada infinite">
+                <li class="item common animated  ">
     
                     <router-link to='/photo' class="chaffle" data-lang="zh">相册</router-link>
         
@@ -19,13 +19,13 @@
                 </li>
     
         
-                <li class="item current animated jello infinite">
+                <li class="item current animated  ">
     
                     <router-link to='/weiyu' class="chaffle" data-lang="zh">微语</router-link>
     
                 </li>
     
-                <li class="item common animated tada infinite">
+                <!-- <li class="item common animated tada infinite">
     
                     <router-link to='/blog' class="chaffle" data-lang="zh">技术</router-link>
 
@@ -40,13 +40,13 @@
     
     
     
-                </li>
+                </li> -->
     
     
     
-                <li class="item common animated tada infinite">
+                <li class="item common animated  ">
     
-                    <router-link to='/contact' class="chaffle" data-lang="zh">联系我</router-link>
+                    <router-link to='/contact' class="chaffle" data-lang="zh">关于我</router-link>
  
     
                 </li>

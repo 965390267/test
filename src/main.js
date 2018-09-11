@@ -29,7 +29,7 @@ axios.interceptors.request.use(config => {
     })
     // http响应拦截器
 axios.interceptors.response.use(data => { // 响应成功关闭loading
-    console.log(data);
+    
     setTimeout(()=>{
         Vue.prototype.bus.$emit('loading', false);
       

@@ -7,9 +7,10 @@
 	
 		<div class="date2">
 	
-			<span class="home"></span><a href="/" title="返回网站首页">首页</a> <b>&gt;</b>
+			<span class="home"></span><router-link  to='/' title="返回网站首页">首页</router-link> <b>&gt;</b>
 	
-			<a href="">文章</a> <b>&gt;</b> <a href="">随笔</a>
+			<router-link  to='/'>文章</router-link> <b></b> 
+				<!-- <router-link  to='/'>随笔</router-link> -->
 	
 			<!--分类原代码 	    <a href="https://omist.cn/?sort=13">Java数据结构与算法</a>
 	
@@ -21,7 +22,7 @@
 	
 			<span class="pview"></span>热度：{{current.visitnumber}}°&nbsp;&nbsp;
 	
-			<a style="color:red;" rel="external nofollow" title="点击提交收录！" >已自动提交收录</a>
+			<!-- <a style="color:red;" rel="external nofollow" title="点击提交收录！" >已自动提交收录</a> -->
 	
 			<!-- 以下是原评论代码，如果你没用多说社会化评论，那么请把下面的“注释”取消就行了。 -->
 	
@@ -65,7 +66,7 @@
 	
 		</div>
 	
-		<blogfoot v-if='loadedshow' :author='current' @reflush="reflushpage"></blogfoot>
+		<blogfoot v-if='loadedshow' :author='current' @reflush="reflushpage" @reloadnext='reloadnext' ref='foot'></blogfoot>
 	
 	
 	
@@ -96,7 +97,24 @@ import {getarticlebyid,viewarticlenums,getarticletag} from '../../api/articleapi
 			};
 	
 		},
+	created() {
+		var self=this;
+		 this.bus.$on('reflusharticle', function(data) {
+           if(data){
+
+	 self.$http.post(getarticlebyid,{id:self.$route.query.databaseid}).then(res => {
+
+
+  
+	 self.current=res.data.data;
+	 self.loadedshow=true;
 	
+	 
+      });
+           
+		   }
+        })
+	},
 		methods: {
 					 format(timestemp){
     var format=new Date(timestemp)
@@ -108,6 +126,22 @@ import {getarticlebyid,viewarticlenums,getarticletag} from '../../api/articleapi
 	var weeks=['星期日','星期一','星期二','星期三','星期四','星期五','星期六']
 return year+'年'+month+'月'+day+'日'+' '+housr+':'+Minutes+' '+weeks[format.getDay()];
 },
+reloadnext(id){
+
+
+	 this.$http.post(getarticlebyid,{id:id}).then(res => {
+
+
+  
+	 this.current=res.data.data;
+
+	// this.$refs.foot.nextarticle()
+	// this.$refs.foot.updatabtn()
+	 
+      });
+
+},
+
 			reflushpage(){
 			
 	this.getarticlebyid();

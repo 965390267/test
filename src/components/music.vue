@@ -298,8 +298,10 @@ export default {
       ? this.$refs.progressslider.currentStyle
       : window.getComputedStyle(this.$refs.progressslider, null);
     this.oStyle = parseInt(this.oStyle["width"]);
-    this.$http.get(music).then(response => {
-      this.musics = response.data;
+    this.$http.get('http://localhost:3000/api/kgmusic').then(res => {
+      // this.musics = response.data;
+      console.log(res)
+      
     });
   },
 

@@ -34,7 +34,7 @@ byclass:[]
 getclass(){
     this.$http.get(getarticleclass).then(res => {
   
-        //微语渲染
+        //分类渲染
   
         this.byclass = res.data.data;
   
@@ -44,7 +44,8 @@ getclass(){
 }
   },
   mounted(){
-this.getclass()
+this.getclass();
+
   }
 }
 </script>

@@ -89,94 +89,7 @@
 	
 			<div id="qrcode"></div>
 	
-			<!-- <center>
-                <div id="pagemenui">
-
-<h3 class="commenttitle">评论列表</h3>
-<hr>
-<ul>
-	<li class="commentlist" v-for="(item,index) in leavemessage" :key='index'>
-		<div class="top">
-		<div class="head"><img src="../../assets/articleimg/head.jpg" alt=""></div>
-		<div class="topbox">
-			<div class="commentleft">
-		<div class="name">{{item.username}}</div>
-		<div class="time">{{item.time}}</div>
-		</div>
-		<div class="commentright">
-		<div class="lookrecive" @click="lookrecieve">{{showrecieve}}</div>
-		<div class="zan" @click='givelike(item._id,index)'>👍赞({{item.likenums}})</div>
-		<div class="delete"><i><img src="../../assets/images/delete.png" alt=""></i> 删除</div>
-		</div>
-		</div>
-	    </div>
-		<div class="bottom">
-			<p>{{item.msg}}</p>
-		</div>
-		<div class="commetrecieve" v-if="isshowrecieve">
-			<p v-for="(twoitem,index) in item.replay" :key='index'><span class="authornamecolor">{{twoitem.username}}</span>回复<span class="namecolor">{{item.username}}</span>:{{twoitem.msg}}<span class="recievelist"><b class="one"><i><img src="../../assets/images/delete.png" alt=""></i> 删除 </b><b ><i class="recieve">回复</i></b> </span></p>
-		</div>
-	</li>
-	
-</ul>
-<div class="nocomment">没有更多评论了</div>
-				</div>
-	
-				<div id="comment-place">
-	
-					<div class="comment-post" id="comment-post">
-	
-						 <div class="cancel-reply" id="cancel-reply" style="display:none"><a href="javascript:void(0);" onclick="cancelReply()">取消回复</a></div>
-	
-						<div class="comment-header">
-	
-							<a name="respond"></a>
-	
-						</div> 
-	
-						<form method="post" name="commentform" action="" id="commentform">
-	
-							<input type="hidden" name="gid" value="55">
-	
-							<p>
-	
-								<input type="text" name="comname" maxlength="49" placeholder="请输入您的昵称！" v-model="username">
-	
-								<label for="author"><small>昵称</small></label>
-	
-							</p>
-	
-							<p>
-	
-								<input type="text" name="commail" maxlength="128" placeholder="请输入您的邮箱！" value="" size="22" v-model="email">
-	
-								<label for="email"><small>邮件地址 (选填)</small></label>
-	
-							</p>
-	
-						
-	
-							<p><textarea name="comment" id="comment" rows="12"  placeholder="尽情吐槽QAQ~" v-model="comment"></textarea></p>
-	
-							<div class="fbpl"> <input type="button" id="comment_submit" value="发表评论" @click='submit'><span id="top2"><a   class="hint--left hint--bounce" @click="top" title="返回顶部"><img src="../../assets/images/top2.png"></a></span>
-	
-								<div
-	
-								    id="gaodu1"></div>
-	
-					</div>
-	
-					<input type="hidden" name="pid" id="comment-pid" value="0" size="22" tabindex="1">
-	
-					</form>
-	
-				</div>
-	
-	</div>
-	
-	
-	
-	</center> -->
+		
 	<!--PC和WAP自适应版-->
 <div id="SOHUCS" :sid="author._id" ></div> 
 
@@ -190,6 +103,7 @@ import {
   getaboutarticle,
   getarticle
 } from "../../api/articleapi.js";
+import {appid,conf} from '../../api/config.js'
 import QRCode from "qrcodejs2";
 export default {
   data() {
@@ -231,40 +145,40 @@ export default {
       };
       top();
     },
-    submit() {
-      this.$http
-        .post(createcomment, {
-          id: this.author._id,
-          username: this.username,
-          msg: this.comment
-        })
-        .then(res => {
-          this.leavemessage = res.data.data.leavemessage;
+    // submit() {
+    //   this.$http
+    //     .post(createcomment, {
+    //       id: this.author._id,
+    //       username: this.username,
+    //       msg: this.comment
+    //     })
+    //     .then(res => {
+    //       this.leavemessage = res.data.data.leavemessage;
          
-        });
-    },
-    givelike(receive_id, index) {
-      this.$http
-        .post(putlikenums, {
-          id: this.author._id,
-          recieveid: receive_id,
-          dbindex: index
-        })
-        .then(res => {
+    //     });
+    // },
+    // givelike(receive_id, index) {
+    //   this.$http
+    //     .post(putlikenums, {
+    //       id: this.author._id,
+    //       recieveid: receive_id,
+    //       dbindex: index
+    //     })
+    //     .then(res => {
         
-          this.likenums = res.data.data[index];
-          this.$set(this.leavemessage, index, { likenums: this.likenums });
-        });
-    },
-    lookrecieve() {
-      if (this.isshowrecieve) {
-        this.isshowrecieve = false;
-        this.showrecieve = "查看回复";
-      } else {
-        this.isshowrecieve = true;
-        this.showrecieve = "收起回复";
-      }
-    },
+    //       this.likenums = res.data.data[index];
+    //       this.$set(this.leavemessage, index, { likenums: this.likenums });
+    //     });
+    // },
+    // lookrecieve() {
+    //   if (this.isshowrecieve) {
+    //     this.isshowrecieve = false;
+    //     this.showrecieve = "查看回复";
+    //   } else {
+    //     this.isshowrecieve = true;
+    //     this.showrecieve = "收起回复";
+    //   }
+    // },
     openarticle(item) {
       this.$router.push({ path: "/blogarticle", query: { databaseid: item } });
 
@@ -296,36 +210,56 @@ export default {
       });
     },
     nextarticle() {
-     console.log(this.author);
-     var submittime=Number(window.localStorage.getItem('submittime')) 
-this.$http.post('http://localhost:3000/api/getarticlenext',{submittime:submittime}).then(response => {
+    
+   
+this.$http.post('http://localhost:3000/api/getarticlenext',{time:this.author.time}).then(response => {
  if(response.data.data.length){
  this.nextarticlename= response.data.data[0].title;
+ this.author.time=response.data.data[0].time;
+ this.updatabtn(this.author.time);
+   this.$emit('reloadnext',response.data.data[0]._id);
+    var doc = document.documentElement || document.body;
+    doc.scrollTop=0;
 }else{
    this.nextarticlename= '木有啦o(╥﹏╥)o';
 }
  
-  var obj=response.data.data
-  this.$emit('reloadnext',response.data.data[0])
+
+
 				});
             
     },
-    updatenextarticle() {
-     console.log(this.author);
-     var submittime=Number(window.localStorage.getItem('submittime')) 
-this.$http.post('http://localhost:3000/api/getarticlenext',{submittime:submittime}).then(response => {
- if(response.data.data.length){
- this.nextarticlename= response.data.data[0].title;
-}else{
-   this.nextarticlename= '木有啦o(╥﹏╥)o';
-}
- 
-				});
-            
-    },
+
     lastarticle() {
-      var submittime=Number(window.localStorage.getItem('submittime')) 
-     this.$http.post('http://localhost:3000/api/getarticlelast',{submittime:submittime}).then(response => {
+     
+     this.$http.post('http://localhost:3000/api/getarticlelast',{time:this.author.time}).then(response => {
+
+   
+    if(response.data.data.length){
+ this.lastarticlename= response.data.data[0].title;
+ this.author.time=response.data.data[0].time;
+ this.updatabtn(this.author.time);
+    this.$emit('reloadnext',response.data.data[0]._id);
+     var doc = document.documentElement || document.body;
+    doc.scrollTop=0;
+}else{
+   this.lastarticlename= '木有啦o(╥﹏╥)o';
+}
+			
+                   ;	
+
+
+				});
+    },
+updatabtn(time){
+this.$http.post('http://localhost:3000/api/getarticlenext',{time:time}).then(response => {
+ if(response.data.data.length){
+ this.nextarticlename= response.data.data[0].title;
+}else{
+   this.nextarticlename= '木有啦o(╥﹏╥)o';
+}
+ 
+     this.$http.post('http://localhost:3000/api/getarticlelast',{time:time}).then(response => {
    console.log(response.data);
    
     if(response.data.data.length){
@@ -333,38 +267,30 @@ this.$http.post('http://localhost:3000/api/getarticlenext',{submittime:submittim
 }else{
    this.lastarticlename= '木有啦o(╥﹏╥)o';
 }
-					console.log(  response.data.data);
+			
                    ;	
-	   var obj=response.data.data
-  this.$emit('reloadnext',response.data.data[0])
+
+ 
 				});
-    },
-        updatelastarticle() {
-      var submittime=Number(window.localStorage.getItem('submittime')) 
-     this.$http.post('http://localhost:3000/api/getarticlelast',{submittime:submittime}).then(response => {
-   
-    if(response.data.data.length){
- this.lastarticlename= response.data.data[0].title;
-}else{
-   this.lastarticlename= '木有啦o(╥﹏╥)o';
-}
-				
+
 				});
-    }
+
+},
   },
   mounted() {
-    this.updatenextarticle();
-    this.updatelastarticle();
-	
-var appid = 'cytMXY367'; 
-var conf = 'prod_3d7edeeba5b206f72e68ceb0d3ede570'; 
+ 
+var appid = appid; 
+var conf = conf; 
 var width = window.innerWidth || document.documentElement.clientWidth; 
 if (width < 960) { 
 window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); 
 } else { 
 	var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
-	var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");
-	b.setAttribute("src",d);if(typeof a==="function"){
+  var b=document.createElement("script");
+  b.setAttribute("type","text/javascript");
+  b.setAttribute("charset","UTF-8");
+  b.setAttribute("src",d);
+  if(typeof a==="function"){
     if(window.attachEvent){
       b.onreadystatechange=function(){
       var e=b.readyState;
@@ -382,11 +308,11 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="tex
     this.qrcode();
     this.leavemessage = this.author.leavemessage;
 
-    console.log(this.$route.query);
+
 
     this.getaboutarticle();
-    this.lastarticle();
-    this.nextarticle();
+    this.updatabtn(this.author.time);
+    // this.nextarticle();
   }
 };
 </script>

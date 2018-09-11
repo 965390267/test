@@ -2,13 +2,14 @@
     <div id="sidebar" style="background-color: rgba(255, 255, 255, 0.6);">
     <calendar></calendar>
        <sousuo></sousuo>
+         <zuixinwenzhang></zuixinwenzhang>
        <biaoqian></biaoqian>
        <fenlei></fenlei>
        <cundang></cundang>
        <pinglun></pinglun>
          <weiyu></weiyu>
     <!-- <youqinglianjie></youqinglianjie> -->
-    <!-- <zuixinwenzhang></zuixinwenzhang> -->
+  
     </div>
 </template>
 <script>
